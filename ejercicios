@@ -1,1 +1,183 @@
 
+   /*toma una coleccion y la divide en dos (split)
+*llama recursivamente el metodo (prog)
+* une los dos fragmentos y ve si en esos dos esta la secuencia (join)
+*/
+
+public int[] secuenciaMin(int[] a){
+
+    secuenciaMinima(a,0 , a.lenght -1)
+
+}
+
+private int[] secuenciaMinima(int[] a,int p , int u ){
+
+    //Caso Base: p=u 
+    //Caso inductivo 
+    if(p<u){
+
+    //split 
+
+    //encontrar la posicion de la mitad del arreglo 
+
+    int mitad = p + (u-p)/2;
+
+    //Prog (conquistar)
+
+    int[] izq = secuenciaMinima(a, p , media);
+    
+    int[] der = secuenciaMinima(a, media+1, u);
+
+
+    //Join (combinar)
+
+    int[] com = mergeSecMin(a, p, mitad, u);
+
+     
+    if(sum(izq) <= sum(der) && sum(izq) <= sum(com) ){
+
+        return izq;
+    }
+    if(sum(der) <= sum(izq) && sum(der)<= sum(com) ){
+
+        return der;
+    }else{
+
+        return com;
+    }
+
+    }
+
+    return new int[0];
+
+
+}
+
+
+  public int sum(int[] a){
+
+    int suma = 0;
+    for(int i = 0;i< a.length; i++ ){
+
+        suma += a[i];
+    }
+
+
+  }
+
+    private int[] mergeSecMin(int[]a,int inicio,int mitad,int fin){
+
+        //Tamaño de ambas partes
+
+        int pi =  mitad-inicio +1 ;
+        int pd =  fin - mitad; 
+        
+        //crear arreglos de las partes 
+
+        int[] ai= new [pi];
+        int[] ad = new [pd];
+        
+        //poner los elementos en cada arreglo
+
+        //arreglo izquierdo
+
+         for(int i = 0; i< pi ; i++ ){
+
+
+            ai[i] = a[inicio+i];
+         }
+         
+         //arreglo derecho
+
+         for(int i = 0; i< pd ; i++ ){
+
+
+            ai[i] = a[(mitad+1)+i];
+         }
+
+         //comparamos valores y tamaños 
+
+        
+          
+         //creamos una variable que tomara el valor de la suma minima
+
+         int min = Integer.MIN_VALUE;
+         int suma = 0;
+
+
+         for(int i = pi -1 ; i >= 0 ; i--){
+                                            
+            suma += pi[i];
+             for(int j = 0; j< pd ; j++){
+
+                suma += pd[j];
+
+                if(min > suma){
+
+                    min = suma;
+                    
+                }
+
+             }
+         }
+
+         suma = 0; 
+         for(int j = 0; j< pd ; j++){
+
+            suma += pd[j];
+             for(int i = pi -1 ; i >= 0 ; i--){
+
+                suma += pi[i];
+
+                if(min > suma){
+
+                    min = suma;
+                }
+
+             }
+         }
+
+
+            for(int i = inicio; i< pi+pd  ; i ++){
+
+                    for(int j = i+1; i< pi+pd+1 ; i ++){
+
+                        if(min == sum(a,i,j)){
+
+                            
+                          return  colocar(a,i,j); 
+                        }
+                            
+                    }
+
+                }
+
+        } 
+
+           public int sum(int[] a, int inicio, int fin){
+
+             int suma = 0;
+            for(int i = inicio ; i < fin +1; i++ ){
+
+                suma += a[i];
+            }
+
+
+             }
+
+            public int[] colocar(int[] a, int inicio, int fin){
+
+                int tamaño = fin-inicio;
+                int[] aux = new int[tamaño]
+                for(int i = 0; i<tamaño;i++){
+
+                    aux[i]= a[inicio+i]
+
+
+                }
+
+                return aux;
+            }
+
+
+
